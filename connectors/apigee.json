@@ -1,0 +1,24 @@
+{
+    "description": "This connection is used to invoke Apigee proxies",
+    "connectorDetails": {
+        "name": "http",
+        "version": "1"
+    },
+    "configVariables": [
+        {
+            "key": "request_protocol",
+            "stringValue": "https"
+        }
+    ],
+    "serviceAccount": "<sa-name>@<project-id>.iam.gserviceaccount.com",
+    "destinationConfigs": [
+        {
+            "key": "host_address",
+            "destinations": [
+                {
+                    "serviceAttachment": "projects/<apigee-tenant-project>/regions/us-west1/serviceAttachments/<apigee-sa-name>"
+                }
+            ]
+        }
+    ]
+}

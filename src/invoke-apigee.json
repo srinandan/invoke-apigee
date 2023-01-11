@@ -1,0 +1,86 @@
+{
+  "triggerConfigs": [{
+    "label": "API Trigger",
+    "startTasks": [{
+      "taskId": "2"
+    }],
+    "properties": {
+      "Trigger name": "invoke-apigee_API_1"
+    },
+    "triggerType": "API",
+    "triggerNumber": "1",
+    "triggerId": "api_trigger/invoke-apigee_API_1"
+  }],
+  "taskConfigs": [{
+    "task": "GenericConnectorTask",
+    "taskId": "1",
+    "parameters": {
+      "connectorInputPayload": {
+        "key": "connectorInputPayload",
+        "value": {
+          "stringValue": "$`Task_1_connectorInputPayload`$"
+        }
+      },
+      "config": {
+        "key": "config",
+        "value": {
+          "jsonValue": "{\n  \"@type\": \"type.googleapis.com/enterprise.crm.eventbus.proto.connectors.GenericConnectorTaskConfig\",\n  \"connection\": {\n    \"connectionName\": \"projects/nandanks-serverless/locations/us-west1/connections/apigee\",\n    \"serviceName\": \"projects/yecf6bf2b816c4f21-tp/locations/us-west1/namespaces/connectors/services/runtime\",\n    \"connectorVersion\": \"projects/nandanks-serverless/locations/global/providers/default/connectors/http/versions/1\"\n  },\n  \"operation\": \"EXECUTE_ACTION\"\n}"
+        }
+      },
+      "connectorOutputPayload": {
+        "key": "connectorOutputPayload",
+        "value": {
+          "stringValue": "$`Task_1_connectorOutputPayload`$"
+        }
+      },
+      "actionName": {
+        "key": "actionName",
+        "value": {
+          "stringValue": "HttpRequest"
+        }
+      }
+    },
+    "taskExecutionStrategy": "WHEN_ALL_SUCCEED",
+    "displayName": "Invoke HTTP Connector"
+  }, {
+    "task": "FieldMappingTask",
+    "taskId": "2",
+    "parameters": {
+      "FieldMappingConfigTaskParameterKey": {
+        "key": "FieldMappingConfigTaskParameterKey",
+        "value": {
+          "jsonValue": "{\n  \"@type\": \"type.googleapis.com/enterprise.crm.eventbus.proto.FieldMappingConfig\",\n  \"mappedFields\": [{\n    \"inputField\": {\n      \"fieldType\": \"JSON_VALUE\",\n      \"transformExpression\": {\n        \"initialValue\": {\n          \"referenceValue\": \"$input.Url$\"\n        }\n      }\n    },\n    \"outputField\": {\n      \"referenceKey\": \"$`Task_1_connectorInputPayload`.Url$\",\n      \"fieldType\": \"JSON_VALUE\",\n      \"cardinality\": \"OPTIONAL\"\n    }\n  }, {\n    \"inputField\": {\n      \"fieldType\": \"STRING_VALUE\",\n      \"transformExpression\": {\n        \"initialValue\": {\n          \"referenceValue\": \"$input.Method$\"\n        }\n      }\n    },\n    \"outputField\": {\n      \"referenceKey\": \"$`Task_1_connectorInputPayload`.Method$\",\n      \"fieldType\": \"JSON_VALUE\",\n      \"cardinality\": \"OPTIONAL\"\n    }\n  }, {\n    \"inputField\": {\n      \"fieldType\": \"JSON_VALUE\",\n      \"transformExpression\": {\n        \"initialValue\": {\n          \"referenceValue\": \"$input.Headers$\"\n        }\n      }\n    },\n    \"outputField\": {\n      \"referenceKey\": \"$`Task_1_connectorInputPayload`.Headers$\",\n      \"fieldType\": \"JSON_VALUE\",\n      \"cardinality\": \"OPTIONAL\"\n    }\n  }]\n}"
+        }
+      }
+    },
+    "nextTasks": [{
+      "taskId": "1"
+    }],
+    "taskExecutionStrategy": "WHEN_ALL_SUCCEED",
+    "displayName": "Map Input to HTTP Connector"
+  }],
+  "integrationParameters": [{
+    "key": "`Task_1_connectorInputPayload`",
+    "dataType": "JSON_VALUE",
+    "displayName": "`Task_1_connectorInputPayload`",
+    "producer": "1_1",
+    "jsonSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"Url\": {\n      \"type\": [\"object\", \"null\"],\n      \"readOnly\": false,\n      \"description\": \"Url object to make request to. Can contain scheme, netloc, path, params, query, fragment in json format. If netloc is provided, it will override the host provided during connection creation\"\n    },\n    \"Method\": {\n      \"type\": [\"string\", \"null\"],\n      \"readOnly\": false,\n      \"description\": \"HTTP request method. Eg. GET, POST, DELETE, PUT etc.\",\n      \"default\": \"GET\"\n    },\n    \"Headers\": {\n      \"type\": [\"object\", \"null\"],\n      \"readOnly\": false,\n      \"description\": \"HTTP request headers\"\n    },\n    \"Body\": {\n      \"type\": [\"string\", \"null\"],\n      \"readOnly\": false,\n      \"description\": \"HTTP request body\"\n    }\n  }\n}"
+  }, {
+    "key": "`Task_1_connectorOutputPayload`",
+    "dataType": "JSON_VALUE",
+    "displayName": "`Task_1_connectorOutputPayload`",
+    "isTransient": true,
+    "producer": "1_1",
+    "jsonSchema": "{\n  \"type\": \"array\",\n  \"items\": {\n    \"type\": \"object\"\n  }\n}"
+  }, {
+    "key": "input",
+    "dataType": "JSON_VALUE",
+    "defaultValue": {
+      "jsonValue": "{\n  \"Url\": {\n    \"scheme\": \"https\",\n    \"path\": \"/orders\"\n  },\n  \"Headers\": {\n    \"Host\": \"api.acme.internal\"\n  },\n  \"Method\": \"GET\"\n}"
+    },
+    "displayName": "input",
+    "inputOutputType": "IN",
+    "jsonSchema": "{\n  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"Headers\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"Host\": {\n          \"type\": \"string\"\n        }\n      }\n    },\n    \"Method\": {\n      \"type\": \"string\"\n    },\n    \"Url\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"path\": {\n          \"type\": \"string\"\n        },\n        \"scheme\": {\n          \"type\": \"string\"\n        }\n      }\n    }\n  }\n}"
+  }],
+  "userLabel": "4"
+}

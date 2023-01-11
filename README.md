@@ -10,6 +10,9 @@ Apigee exposes the runtime APIs (sometimes referred to as northbound) through a 
 
 ![architecture diagram](./img/image.png)
 
+<p style="text-align: center;"><i>This image shows workloads in GCP. However, the target could be on the internet, on-prem etc.</i></p>
+<br><br>
+
 1. Use the [Instances API](https://cloud.google.com/apigee/docs/reference/apis/apigee/rest/v1/organizations.instances/get) to query the service attachment name. You can also use [apigeecli](https://github.com/apigee/apigeecli) like this:
 
 ```sh

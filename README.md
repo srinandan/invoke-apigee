@@ -63,7 +63,7 @@ The response should look like this:
 * Apigee is provisioned and at least one Apigee instance exists
 * There exists at least one Connector already provisioned
 * The integration version JSON is downloaded [here](./src/executeworkflows.json)
-* This repo uses a custom cloud builder called `integrationcli-builder`. , based on [integrationcli](https://github.com/srinandan/integrationcli) and gcloud
+* This repo uses a custom cloud builder called `integrationcli-builder`, based on [integrationcli](https://github.com/srinandan/integrationcli) and gcloud
 
 # Configuring Cloud Build
 

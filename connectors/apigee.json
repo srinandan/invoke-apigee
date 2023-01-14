@@ -10,7 +10,6 @@
             "stringValue": "https"
         }
     ],
-    "serviceAccount": "<sa-name>@<project-id>.iam.gserviceaccount.com",
     "destinationConfigs": [
         {
             "key": "host_address",

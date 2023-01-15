@@ -82,16 +82,13 @@ Grant the Application Integration Admin role to the Cloud Build Service Agent
 
 ## Steps
 
-1. Modify the [connectors file](./connectors/apigee.json) to set the appropriate Service Account and Service Attachment. Replace the following strings
+1. Modify the [cloudbuild](./cloudbuild.yaml#L74) file to set the appropriate Service Account nanme. Replace the following strings
 
-```
-"serviceAccount": "<sa-name>@<project-id>.iam.gserviceaccount.com",
-...
-            "destinations": [
-                {
-                    "serviceAttachment": "projects/<apigee-tenant-project>/regions/<location>/serviceAttachments/<apigee-sa-name>"
-                }
-...
+```yaml
+#the name of the service account  to use when setting up the connector
+substitutions:
+  _SERVICE_ACCOUNT_NAME: "connectors"
+
 ```
 
 2. Trigger the build manually

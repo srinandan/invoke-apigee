@@ -82,7 +82,7 @@ Grant the Application Integration Admin role to the Cloud Build Service Agent
 
 ## Steps
 
-1. Modify the [cloudbuild](./cloudbuild.yaml#L74) file to set the appropriate Service Account nanme. Replace the following strings
+1. Modify the [cloudbuild](./cloudbuild.yaml#L74) file to set the appropriate Service Account name. Replace the following variable
 
 ```yaml
 #the name of the service account  to use when setting up the connector

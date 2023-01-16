@@ -85,7 +85,7 @@ Grant the Connector Admin role to the Cloud Build Service Agent
 ```
     gcloud projects add-iam-policy-binding PROJECT_ID \
         --member="serviceAccount:service-PROJECT_NUMBER@gcp-sa-cloudbuild.iam.gserviceaccount.com" \
-        --role="roles/roles/connectors.admin"
+        --role="roles/connectors.admin"
 ```
 
 ## Steps

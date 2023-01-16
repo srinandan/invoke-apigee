@@ -80,6 +80,14 @@ Grant the Application Integration Admin role to the Cloud Build Service Agent
         --role="roles/integrations.integrationAdmin"
 ```
 
+Grant the Connector Admin role to the Cloud Build Service Agent
+
+```
+    gcloud projects add-iam-policy-binding PROJECT_ID \
+        --member="serviceAccount:service-PROJECT_NUMBER@gcp-sa-cloudbuild.iam.gserviceaccount.com" \
+        --role="roles/roles/connectors.admin"
+```
+
 ## Steps
 
 1. Modify the [cloudbuild](./cloudbuild.yaml#L74) file to set the appropriate Service Account name. Replace the following variable

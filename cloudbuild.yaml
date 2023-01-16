@@ -36,7 +36,7 @@ steps:
         if [ $(cat /tmp/result) -ne 0 ]; then
           set -e
           #create the connection
-          /tmp/integrationcli connectors create -n $(basename -s .json $connection) -f $connection -sa ${_SERVICE_ACCOUNT_NAME} > /tmp/response
+          /tmp/integrationcli connectors create -n $(basename -s .json $connection) -f $connection --sa ${_SERVICE_ACCOUNT_NAME} > /tmp/response
           echo "connector response: " $(cat /tmp/response)
         fi
       done
